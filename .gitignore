@@ -1,0 +1,13 @@
+# Dependencies (any folder named node_modules in the repo)
+node_modules/
+
+# Vite / frontend build
+client/dist/
+
+# Logs & OS
+*.log
+.DS_Store
+
+# Local env (secrets)
+.env
+.env.*
