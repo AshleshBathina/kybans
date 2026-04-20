@@ -6,10 +6,10 @@ const path = require('path');
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+app.use(cors({ origin: process.env.CLIENT }));
 app.use(express.json());
 
-const db = new Database(path.join(__dirname, 'kybans.db')); 
+const db = new Database(path.join(__dirname, 'kybans.db'));
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS slots (
