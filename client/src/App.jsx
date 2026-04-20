@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
-const API = 'https://kybans.onrender.com/api'
+const API = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
 const MONTH_START = '2026-04-01'
 const MONTH_END = '2026-04-30'
 
