@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
-const API = '/api'
+const API = 'https://kybans.onrender.com/api'
 const MONTH_START = '2026-04-01'
 const MONTH_END = '2026-04-30'
 
