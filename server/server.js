@@ -6,24 +6,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const allowedOrigins = (process.env.CLIENT || '')
-  .split(',')
-  .map((origin) => origin.trim().replace(/\/$/, ''))
-  .filter(Boolean);
-
-app.use(
-  cors({
-    origin(origin, callback) {
-      // Allow server-to-server and local tools without Origin header.
-      if (!origin) return callback(null, true);
-      const normalized = origin.replace(/\/$/, '');
-      if (allowedOrigins.length === 0 || allowedOrigins.includes(normalized)) {
-        return callback(null, true);
-      }
-      return callback(new Error('Not allowed by CORS'));
-    },
-  })
-);
+app.use(cors({ allowedOrigins: process.env.CLIENT }));
 app.use(express.json());
 
 const db = new Database(path.join(__dirname, 'kybans.db'));
