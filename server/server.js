@@ -35,6 +35,10 @@ const seedAll = db.transaction(() => {
 });
 seedAll();
 
+app.get('/', (req, res) => {
+  return res.status(200).json({ message: 'The backend is live' })
+})
+
 //user routes
 app.get('/api/slots/:date', (req, res) => {
   const { date } = req.params;
