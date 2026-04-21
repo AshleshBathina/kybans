@@ -1,7 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 
-const API = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
+function resolveApiBase() {
+  const raw = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '')
+  if (!raw) return '/api'
+  // If env points to server origin (e.g. http://localhost:3001), append /api.
+  if (/^https?:\/\//.test(raw) && !raw.endsWith('/api')) return `${raw}/api`
+  return raw
+}
+const API = resolveApiBase()
 const MONTH_START = '2026-04-01'
 const MONTH_END = '2026-04-30'
 
@@ -157,10 +164,12 @@ export default function App() {
               const el = dateInputRef.current
               if (!el) return
               if (typeof el.showPicker === 'function') {
-                void el.showPicker().catch(() => {
+                try {
+                  el.showPicker()
+                } catch {
                   el.focus()
                   el.click()
-                })
+                }
               } else {
                 el.focus()
                 el.click()
