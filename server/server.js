@@ -35,13 +35,14 @@ const seedAll = db.transaction(() => {
 });
 seedAll();
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   return res.status(200).json({ message: 'The backend is live' })
 })
 
 //user routes
 app.get('/api/slots/:date', (req, res) => {
   const { date } = req.params;
+
   const rows = db
     .prepare('SELECT hour, sub_slots, blocked FROM slots WHERE date = ? ORDER BY hour')
     .all(date);
