@@ -90,8 +90,8 @@ app.post('/api/admin/slots/block', (req, res) => {
     return res.status(400).json({ error: 'date, hour, and blocked are required' });
   }
 
-  const noOfSubSlots = db.prepare('SELECT sub_slots FROM slots WHERE date = ? AND hour = ?').get(date, hour);
-  if (noOfSubSlots == 0) {
+  const subSlots = db.prepare('SELECT sub_slots FROM slots WHERE date = ? AND hour = ?').get(date, hour);
+  if (subSlots == 0) {
     return res.status(400).json({ error: 'this slot is already booked fully' })
   }
 
