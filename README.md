@@ -1,4 +1,4 @@
-# Kybans Slot Booking
+# Kybans
 
 Simple slot booking app with:
 - `client/`: React + Vite frontend
